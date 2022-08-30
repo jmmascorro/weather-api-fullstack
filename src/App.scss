@@ -16,4 +16,31 @@ h1 {
   justify-content: center;
 }
 
+.search-box{
+  display:flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+#input_weather {
+  border-radius: 10px;
+  text-align: center;
+  height: 30px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+#submit_button {
+  border-radius: 8px;
+  width: 70%;
+  font-size: 15px;
+}
+
+.weather{
+  display: flex;
+  justify-content: center;
+}
+
+
 

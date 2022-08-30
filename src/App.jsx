@@ -1,6 +1,7 @@
 import './App.scss';
 import { useState } from "react";
 import WeatherContainer from './components/WeatherContainer/WeatherContainer';
+import HistoricalWeatherContainer from './components/HistoricalWeatherContainer/HistoricalWeatherContainer';
 
 function App() {
 
@@ -8,8 +9,10 @@ function App() {
 
     const [weather, setWeather] = useState();
 
+    const [ historicalWeather, setHistoricalWeather ] = useState(); 
+
     const handleChange = (event) => {
-      const cityName = event.target.value.toLowerCase();
+      const cityName = event.target.value.toLowerCase().charAt(0).toUpperCase() + event.target.value.slice(1);
       setCityName(cityName);
     }
 
@@ -25,11 +28,27 @@ function App() {
       })
       .then(data => {
        setWeather(data)
+       fetch("http://localhost:3002/api/weather", {
+        method: 'POST',
+        headers: {'Content-Type':'application/json; charset=UTF-8'},
+        body: JSON.stringify({
+          name: data.name,
+          temp: data.main.temp,
+          feels_like: data.main.feels_like
+        })
+      })
+      fetch("http://localhost:3002/api/weather")
+      .then((response) => {
+        return response.json();
+      })
+      .then(data => {
+        setHistoricalWeather(data)
+      })
       })
       .catch(err => {
-      console.log(err)
-      })
-  }
+        console.log(err)
+      })  
+    }
 
   return (
     <div className="App">
@@ -37,14 +56,20 @@ function App() {
         <h1>Welcome to the Weather</h1>
       </header>
       <section className="search-weather">
-        <form className="search-box" onSubmit={handleSubmit} >
+        <form className="search-box" onSubmit={handleSubmit} method='POST'>
             <label className="search-box__label"></label>
-            <input type="text" value={cityName || ""} onChange={handleChange} name="name" placeholder="name"/><br></br>
-            <input type="submit" value="Search Weather" />
+            <input type="text" id="input_weather" autocomplete="off" 
+            value={cityName || ""} onChange={handleChange} name="name" 
+            placeholder="Search City" class="form-control text-muted form-rounded p-4 shadow-sm"/><br></br>
+            <input type="submit" id="submit_button" value="Search Weather" />
         </form>
       </section>
-      <section className="weather-card">
-       {weather && <WeatherContainer weather={weather}/>} 
+      <section className="weather">
+        <div className="card">
+       {weather && <WeatherContainer weather={weather}/>}
+       <h2>Historical Weather</h2>
+       {historicalWeather && <HistoricalWeatherContainer historicalWeather={historicalWeather} weather={weather}/>}
+       </div>
       </section>
     </div>
   );
