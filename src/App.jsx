@@ -71,7 +71,7 @@ function App() {
         <div className="weather-cards">
        {weather && <WeatherContainer weather={weather}/>}
        {historicalWeather && <HistoricalWeatherContainer historicalWeather={historicalWeather} weather={weather}/>}
-       </div>
+       </div> 
       </section>
     </div>
   );
