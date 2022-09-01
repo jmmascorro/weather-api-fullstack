@@ -1,11 +1,33 @@
-const HistoricalWeatherCard = ({ cityName, temp, feelsLike, createdAt }) => {
+import "./HistoricalWeatherCard.scss";
 
-    return(
+const HistoricalWeatherCard = ({ cityName, temp, feelsLike, condition, high, low, humidity, createdAt }) => {
+
+    return (
         <div className="weather-card">
             <h2 className="weather-card__cityname">{cityName}</h2>
-            <h2 className="weather-card__temp">Temp: {temp}°</h2> 
-            <h2 className="weather-card__feelslike">Feels Like: {feelsLike}°</h2>
-            <h2 className="weather-card__createdAt">{createdAt}</h2>
+            <div className="card-body">
+                <div className="card-mid row">
+                    <div className="weather-card__temp">
+                      <span>{temp}°F</span>  
+                    </div>
+                    <div className="weather-card__condition-temp">
+                        <p className="condition"><i>{condition}</i></p>
+                        <p className="high">High: {high}°F</p>
+                        <p className="low">Low: {low}°F</p>
+                    </div>
+                </div>
+                <div className="weather-card__card-bottom">
+                  <div className="weather-card__feels-like">
+                      <p className="feels-like">{feelsLike}°F</p>
+                      <span>Feels Like</span>
+                  </div>  
+                    <div className="weather-card__humidity">
+                        <p className="humidity">{humidity}%</p>
+                        <span>Humidity</span>
+                    </div> 
+                </div>
+                </div>
+                <p className="created">{createdAt}</p>
         </div>
     )
 }

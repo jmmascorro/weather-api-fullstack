@@ -1,4 +1,6 @@
 import HistoricalWeatherCard from "../HistoricalWeatherCard/HistoricalWeatherCard";
+import "./HistoricalWeatherContainer.scss";
+import moment from "moment";
 
 const HistoricalWeatherContainer = (props) => {
 
@@ -15,15 +17,17 @@ const HistoricalWeatherContainer = (props) => {
             const filteredHistoricalWeather = filteredWeather.slice(-1);
             
                  return (
-                    <div>
-                    <HistoricalWeatherCard cityName={filteredHistoricalWeather[0].name} 
+                    <div className="hist-weather-card">
+                        <h1>Historical Forecast</h1>
+                    <HistoricalWeatherCard cityName={filteredHistoricalWeather[0].name} condition={filteredHistoricalWeather[0].description}
                         temp={Math.round(filteredHistoricalWeather[0].temp)} feelsLike={Math.round(filteredHistoricalWeather[0].feels_like)}
-                        createdAt={filteredHistoricalWeather[0].createdAt}/>
+                        createdAt={moment(filteredHistoricalWeather[0].createdAt).format('MM-DD-YY / LT')} high={filteredHistoricalWeather[0].temp_max} low={filteredHistoricalWeather[0].temp_min}
+                        humidity={filteredHistoricalWeather[0].humidity}/>
                     </div>
                  )
         }else {
     
-            return <h1>New Entry</h1>
+            return <h1></h1>
             
         }
 }

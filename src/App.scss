@@ -1,10 +1,14 @@
 * {
   margin: 0;
+  color: white;
+  text-shadow: -1px 1px 2px #000,
+        1px 1px 2px #000;
 }
 
 App-header {
   display: flex;
   text-justify: center;
+  
 }
 
 h1 {
@@ -29,17 +33,24 @@ h1 {
   height: 30px;
   margin: 5px;
   font-size: 20px;
-}
-
-#submit_button {
-  border-radius: 8px;
-  width: 70%;
-  font-size: 15px;
+  outline: none;
+  border: none;
+  box-shadow: 5px 5px 20px;
+  background-color: white;
+  color: black;
+  text-shadow: none;
 }
 
 .weather{
   display: flex;
   justify-content: center;
+}
+
+.weather-cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 60px;
 }
 
 

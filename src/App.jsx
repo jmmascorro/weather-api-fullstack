@@ -34,7 +34,11 @@ function App() {
         body: JSON.stringify({
           name: data.name,
           temp: data.main.temp,
-          feels_like: data.main.feels_like
+          feels_like: data.main.feels_like,
+          description: data.weather[0].description,
+          temp_max: data.main.temp_max,
+          temp_min: data.main.temp_min,
+          humidity: data.main.humidity
         })
       })
       fetch("http://localhost:3002/api/weather")
@@ -46,7 +50,7 @@ function App() {
       })
       })
       .catch(err => {
-        console.log(err)
+        alert(err)
       })  
     }
 
@@ -58,16 +62,14 @@ function App() {
       <section className="search-weather">
         <form className="search-box" onSubmit={handleSubmit} method='POST'>
             <label className="search-box__label"></label>
-            <input type="text" id="input_weather" autocomplete="off" 
+            <input type="text" id="input_weather" autoComplete="off" 
             value={cityName || ""} onChange={handleChange} name="name" 
-            placeholder="Search City" class="form-control text-muted form-rounded p-4 shadow-sm"/><br></br>
-            <input type="submit" id="submit_button" value="Search Weather" />
+            placeholder="Search City" className="form-control text-muted form-rounded p-4 shadow-sm"/><br></br>
         </form>
       </section>
       <section className="weather">
-        <div className="card">
+        <div className="weather-cards">
        {weather && <WeatherContainer weather={weather}/>}
-       <h2>Historical Weather</h2>
        {historicalWeather && <HistoricalWeatherContainer historicalWeather={historicalWeather} weather={weather}/>}
        </div>
       </section>
