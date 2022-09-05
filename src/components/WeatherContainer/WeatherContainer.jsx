@@ -10,9 +10,11 @@ const WeatherContainer = (props) => {
      return (
         <div className="current-weather-card">
             <h1>Current Forecast</h1>
-        <WeatherCard cityName={weather.name} temp={Math.round(weather.main.temp)} condition={weather.weather[0].description}
+            <div className="card-weather">
+        <WeatherCard  cityName={weather.name} temp={Math.round(weather.main.temp)} condition={weather.weather[0].description}
         feelsLike={Math.round(weather.main.feels_like)} high={Math.round(weather.main.temp_max)} low={Math.round(weather.main.temp_min)}
         humidity={weather.main.humidity} />
+        </div>
         </div>
      ) 
     }
